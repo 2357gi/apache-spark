@@ -4,6 +4,11 @@
 ```shell
 $ make run
 ```
+もしworker nodeを複数立ち上げたい場合は
+
+```shell
+$ make run WORKER=$(任意のnode数)
+```
 
 
 参考:
