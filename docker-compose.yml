@@ -1,16 +1,17 @@
+
 version: '3'
 
 services:
 
   master:
-    image: .
+    image: 2357gi/apache-spark:latest
     ports:
       - 4040:4040
       - 8080:8080
     command: /spark/bin/spark-class org.apache.spark.deploy.master.Master --host 0.0.0.0
 
   worker:
-    image: .
+    image: 2357gi/apache-spark:latest
     depends_on:
       - master
     ports:
