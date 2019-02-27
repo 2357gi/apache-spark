@@ -6,7 +6,7 @@ build_docker: Dockerfile
 
 build_compose:
 	@echo "\n🏗 Pile up containers"
-	@docker-compose up -d --scale worker-$(WORKER)
+	@docker-compose up -d --scale worker=$(WORKER)
 
 run: docker-compose.yml
 	@echo "\n✨ apache-spark cluster setup is start!"
