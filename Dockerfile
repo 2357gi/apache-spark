@@ -5,11 +5,9 @@ ENV SPARK_VERSION=2.4.0 \
 	HADOOP_VERSION=2.7 \
 	SPARK_HOME=/spark \
 	PATH=$SPARK_HOME/bin:$PATH \
-	PYSPARK_PYTHON=/usr/bin/python3
-
-
-RUN PYSPARK_DRIVER_PYTHON=/usr/local/bin/jupyter \
-RUN PYSPARK_DRIVER_PYTHON_OPTS="notebook --no-browser --port 8888 --ip=0.0.0.0 --allow-root"
+	PYSPARK_PYTHON=/usr/bin/python3 \
+	PYSPARK_DRIVER_PYTHON=/usr/local/bin/jupyter \
+	PYSPARK_DRIVER_PYTHON_OPTS="notebook --no-browser --port 8888 --ip=0.0.0.0 --allow-root"
 
 
 
@@ -38,7 +36,7 @@ RUN pip3 install ipyparallel \
 	&& ipcluster nbextension enable
 
 
-COPY src/ /
+# COPY src/ /
 
 
 # sparkのnode接続用port
