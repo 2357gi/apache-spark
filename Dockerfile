@@ -11,17 +11,15 @@ ENV SPARK_VERSION=2.4.0 \
 
 
 
- #Install required apt package and ensure that the packages were installed
-# デバッグ中に付き一つずつinstallしてあるので最後に纏める
+# Install required apt package and ensure that the packages were installed
 RUN apt-get update && apt-get install -y \
 	bc \
 	curl \
 	default-jdk \
 	git \
 	python3 \
+	python3-pip \
 	scala
-
-RUN apt-get install -y 	python3-pip
 
 
 # Install spark
@@ -32,11 +30,10 @@ RUN mkdir spark &&\
 
 
 RUN pip3 install jupyter
+
+
 RUN pip3 install ipyparallel \
 	&& ipcluster nbextension enable
-
-
-# COPY src/ /
 
 
 # sparkのnode接続用port
