@@ -13,7 +13,7 @@ run: docker-compose.yml
 	@make build_docker
 	@make build_compose
 	@echo "\n🍾 set up is finished! \n you wanna access ⚡spaek shell, hit it! \n$$ make  s-shell"
-	@echo "or you wanna start scala notebook, hit it! \n$$ make notebook"
+	@echo "or you wanna start 📔 pyspark notebook, hit it! \n$$ make notebook"
 	@echo "... if u wanna open 🐚 shell? do this. \n$$ make shell"
 
 s-shell:
@@ -22,7 +22,7 @@ s-shell:
 
 notebook:
 	@echo "\n📔 start pyspark notebook...."
-	@docker-compose exec master jupyter /spark/bin/pyspark
+	@docker-compose exec master /spark/bin/pyspark
 	@docker-compose exec
 
 shell:
