@@ -29,3 +29,9 @@ shell:
 	@echo "\n🐚 start master shell...."
 	@docker-compose exec master /bin/bash
 
+
+kick-py:
+	@echo "\n 🎯 lets kick spark with py-file!"
+	@echo "\n target .py is ${PYFILE}"
+	@docker-compose exec master /spark/bin/spark-submit --py-files ${PYFILE} ${PYFILE}
+

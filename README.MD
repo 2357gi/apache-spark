@@ -10,6 +10,7 @@ $ make run
 $ make run WORKER=$(任意のnode数)
 ```
 
+その他の動作は$ make run後に出てくるメッセージやmakefileをごらんください
 
 参考:
 [Docker でお試し Spark クラスタを構築する - Qiita](https://qiita.com/hoto17296/items/12366c9f9965ce28a780)
