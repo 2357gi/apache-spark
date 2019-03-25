@@ -36,13 +36,3 @@ RUN pip3 install ipyparallel \
 	&& ipcluster nbextension enable
 
 
-# sparkのnode接続用port
-EXPOSE 8080
-
-# sparkのwebUI用のport
-EXPOSE 4040
-
-# jupyter notebook用のport
-EXPOSE 8888
-
-

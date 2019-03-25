@@ -1,4 +1,5 @@
 WORKER=1
+PYFILE=pythonファイルを指定してください
 
 build_docker: Dockerfile
 	@echo "\n📦 build 2357gi/apache-spark"
