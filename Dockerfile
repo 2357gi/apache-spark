@@ -5,17 +5,15 @@ ENV SPARK_VERSION=2.4.0 \
 	HADOOP_VERSION=2.7 \
 	SPARK_HOME=/spark \
 	PATH=$SPARK_HOME/bin:$PATH \
-	PYSPARK_PYTHON=/usr/bin/python3 \
-	PYSPARK_DRIVER_PYTHON=/usr/local/bin/jupyter \
-	PYSPARK_DRIVER_PYTHON_OPTS="notebook --no-browser --port 8888 --ip=0.0.0.0 --allow-root"
+	PYSPARK_PYTHON=/usr/bin/python3
 
 
 
-# Install required apt package and ensure that the packages were installed
+ #Install required apt package and ensure that the packages were installed
 RUN apt-get update && apt-get install -y \
 	bc \
 	curl \
-	default-jdk \
+	openjdk-8-jdk \
 	git \
 	python3 \
 	python3-pip \
@@ -29,10 +27,17 @@ RUN mkdir spark &&\
 	| tar zx -C spark --strip-components 1
 
 
-RUN pip3 install jupyter
-
-
-RUN pip3 install ipyparallel \
+# install pip someting 4 notebook
+RUN pip3 install jupyter && \
+	pip3 install pandas && \
+	pip3 install ipyparallel \
 	&& ipcluster nbextension enable
+
+
+COPY src/ /
+
+
+
+WORKDIR /work/
 
 

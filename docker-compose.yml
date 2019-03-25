@@ -1,24 +1,58 @@
-
 version: '3'
 
 services:
-
   master:
-    image: 2357gi/apache-spark:latest
+    image: 2357gi/apache-spark
+    hostname: master
     ports:
       - 4040:4040
+      - 6066:6066
       - 8080:8080
-      - 8888:8888
+      - 7077:7077
+    environment:
+        MASTER: spark://master:7077
+        SPARK_CONF_DIR: /conf
+        SPARK_PUBLIC_DNS: localhost
     volumes:
-      - ./data:/src
-    command: /spark/bin/spark-class org.apache.spark.deploy.master.Master --host 0.0.0.0
+      - ./work:/work
+      - ./data:/data
+    command: /spark/bin/spark-class org.apache.spark.deploy.master.Master -h master
 
-  worker:
-    image: 2357gi/apache-spark:latest
+  worker1:
+    image: 2357gi/apache-spark
+    hostname: worker1
     depends_on:
-      - master
+     - master
     ports:
-      - 8081-8089:8081
+        - 8081:8081
+    environment:
+        SPARK_CONF_DIR: /conf
+        SPARK_WORKER_CORES:
+        SPARK_WORKER_MEMORY: 2g
+        SPARK_WORKER_PORT: 8081
+        SPARK_WORKER_WEBUI_PORT: 8081
+        SPARK_PUBLIC_DNS: localhost
     volumes:
-      - ./data:/src
-    command: /spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077 --host 0.0.0.0
+      - ./work:/work
+      - ./data:/data
+    command: /spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
+
+  worker2:
+    image: 2357gi/apache-spark
+    hostname: worker1
+    depends_on:
+     - master
+    ports:
+        - 8082:8082
+    environment:
+        SPARK_CONF_DIR: /conf
+        SPARK_WORKER_CORES:
+        SPARK_WORKER_MEMORY: 2g
+        SPARK_WORKER_PORT: 8082
+        SPARK_WORKER_WEBUI_PORT: 8082
+        SPARK_PUBLIC_DNS: localhost
+    volumes:
+      - ./work:/work
+      - ./data:/data
+    command: /spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
+
